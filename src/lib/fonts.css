@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "jennymadeFontV1";
+  font-style: normal;
+  font-weight: 400;
+  src:
+    url("./fonts/jennymadeFontVer1.ttf") format("truetype"),
+    url("./fonts/jennymadeFontVer1.otf") format("opentype"),
+    url("./fonts/jennymadeFontVer1.woff2") format("woff2");
+}
