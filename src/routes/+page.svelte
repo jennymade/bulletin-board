@@ -11,8 +11,9 @@
   <div class="websiteHeader">
     <div>
       <h1>
-        <span class="jennyfont">jennymade</span><span class="definition"
-          >adjective</span
+        <!--use jenny kwon or jennymade?-->
+        <span class="jennyfont">jenny kwon</span><span class="definition"
+          >noun</span
         >
       </h1>
     </div>
@@ -47,8 +48,10 @@
             </li>
             <li class="note design" tabIndex={0}>
               <div class="noteContent">
-                <h4 class="noteHed">design work</h4>
-                <p class="noteDesc"></p>
+                <img
+                  alt="Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene."
+                  src="src/lib/thumbnails/powellst.gif"
+                />
               </div>
 
               <div class="fold" tabIndex={0}>
@@ -185,15 +188,15 @@
     text-align: center;
 
     .jennyfont {
-      font-family: "jennymadeFontV1", sans-serif;
-      letter-spacing: -0.1rem;
+      font-family: "jennymadeFontV2", sans-serif;
+      /* letter-spacing: -0.1rem; */
       font-size: 108px;
       line-height: 0.75;
     }
 
     .definition {
-      font-family: "jennymadeFontV1", sans-serif;
-      letter-spacing: -0.1rem;
+      font-family: "jennymadeFontV2", sans-serif;
+      /* letter-spacing: -0.1rem; */
       font-size: 36px;
       color: #aaaaaa;
     }
@@ -210,24 +213,25 @@
       font-size: 18px;
     }
 
+    /* styling header section for mobile */
     @media (max-width: 640px) {
       text-align: left;
       margin: 2rem;
 
       .jennyfont {
-        font-size: 72px;
+        font-size: 84px;
       }
 
       .definition {
-        font-size: 32px;
+        font-size: 36px;
       }
 
       p {
-        font-size: 18px;
+        font-size: 24px;
       }
 
       .scrollInstructions {
-        font-size: 16px;
+        font-size: 18px;
       }
     }
   }
@@ -287,11 +291,13 @@
   }
 
   .sectionHed {
-    font-family: "jennymadeFontV1", sans-serif;
+    font-family: "jennymadeFontV2", sans-serif;
     font-size: 72px;
+    /* adjust - either 300 or 700 */
+    font-weight: 300;
     line-height: 0.75;
     text-align: center;
-    letter-spacing: -0.1rem;
+    /* letter-spacing: -0.1rem; */
   }
 
   .notesParentWrapper {
