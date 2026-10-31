@@ -297,7 +297,7 @@
     font-weight: 300;
     line-height: 0.75;
     text-align: center;
-    /* letter-spacing: -0.1rem; */
+    letter-spacing: -0.2rem;
   }
 
   .notesParentWrapper {
