@@ -1,4 +1,5 @@
 <script>
+  import { asset } from "$app/paths";
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
   import crapt1 from "#lib/thumbnails/cra-pt1-dataviz.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
@@ -151,9 +152,12 @@
     --noteHeight: 15rem;
     --noteWidth: 15rem;
 
+    --mobilePan: -50vw;
+
     @media screen and (max-width: 672px) {
       --noteHeight: 10rem;
       --noteHeight: 10rem;
+      --mobilePan: -150vw;
     }
 
     --maxHeight: 500px;
@@ -298,7 +302,7 @@
         transform: translate3d(0, 0, 0);
       }
       to {
-        transform: translate3d(-50vw, 0, 0);
+        transform: translate3d(var(--mobilePan), 0, 0);
       }
     }
   }

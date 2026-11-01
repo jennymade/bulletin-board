@@ -1,11 +1,15 @@
 import adapter from "@sveltejs/adapter-static";
+import process from "node:process";
 import { sveltekit } from "@sveltejs/kit/vite";
 import { defineConfig } from "vite";
 
 export default defineConfig({
-  base: "/bulletin-board/",
   plugins: [
     sveltekit({
+      adapter: adapter(),
+      paths: {
+        base: process.argv.includes("dev") ? "" : process.env.BASE_PATH,
+      },
       prerender: {
         handleHttpError: ({ path, referrer, message }) => {
           // ignore deliberate link to shiny 404 page
@@ -29,7 +33,6 @@ export default defineConfig({
       // adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
       // If your environment is not supported, or you settled on a specific environment, switch out the adapter.
       // See https://svelte.dev/docs/kit/adapters for more information about adapters.
-      adapter: adapter(),
     }),
   ],
 });
