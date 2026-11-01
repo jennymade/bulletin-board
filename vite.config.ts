@@ -6,6 +6,20 @@ export default defineConfig({
   base: "/bulletin-board/",
   plugins: [
     sveltekit({
+      prerender: {
+        handleHttpError: ({ path, referrer, message }) => {
+          // ignore deliberate link to shiny 404 page
+          if (
+            path === "/not-found" &&
+            referrer === "/blog/how-we-built-our-404-page"
+          ) {
+            return;
+          }
+
+          // otherwise fail the build
+          throw new Error(message);
+        },
+      },
       compilerOptions: {
         // Force runes mode for the project, except for libraries. Can be removed in svelte 6.
         runes: ({ filename }) =>

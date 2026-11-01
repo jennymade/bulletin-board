@@ -7,6 +7,8 @@
 
 <!-- to do: sharpie as cursor? something to do with a sharpie -->
 
+<!-- to fix: if animation on fold hover/focus doesn't work, take tabIndex away from the fold — only leave for post-it -->
+
 <div class="whiteBoard">
   <div class="websiteHeader">
     <div>
@@ -22,7 +24,7 @@
       data and concepts of a plan into clear, insightful storytelling
     </p>
     <p class="scrollInstructions">
-      scroll down to see past work 👇 click or tab a post-it corner to read more
+      scroll down to see past work 👇 click on or tab to a post-it to read more
       🗒️
     </p>
   </div>
@@ -37,7 +39,7 @@
               <div class="noteContent">
                 <img
                   alt="Black families began moving to San Francisco in the 1940s seeking greater economic opportunity during World War II. Over the next few decades, they settled in neighborhoods from the Fillmore to the Bayview. The city's Black population reached its peak in 1970 before starting to decline. New data shows how the reversal reshaped every neighborhood, including three historically Black enclaves."
-                  src="src/lib/thumbnails/blacksf-pt1-topper.gif"
+                  src="../lib/thumbnails/blacksf-pt1-topper.gif"
                 />
               </div>
 
@@ -50,7 +52,7 @@
               <div class="noteContent">
                 <img
                   alt="Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene."
-                  src="src/lib/thumbnails/powellst.gif"
+                  src="../lib/thumbnails/powellst.gif"
                 />
               </div>
 
@@ -79,7 +81,7 @@
               <div class="noteContent">
                 <img
                   alt="From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients"
-                  src="src/lib/thumbnails/psychholds.gif"
+                  src="../lib/thumbnails/psychholds.gif"
                 />
               </div>
 
@@ -92,7 +94,7 @@
               <div class="noteContent">
                 <img
                   alt="Behind locked drawers of file cabinets, in police departments all over California, sit documents no one is supposed to see.Known as clean-record agreements, they conceal the misconduct of hundreds of officers, helping them land new jobs in law enforcement. These documents have been secret — until this investigation."
-                  src="src/lib/thumbnails/cra-pt1-dataviz.gif"
+                  src="../lib/thumbnails/cra-pt1-dataviz.gif"
                 />
               </div>
 
@@ -143,6 +145,12 @@
 
     --noteHeight: 15rem;
     --noteWidth: 15rem;
+
+    @media screen and (max-width: 672px) {
+      --noteHeight: 10rem;
+      --noteHeight: 10rem;
+    }
+
     --maxHeight: 500px;
     --whiteboardColor: #fff;
 
@@ -262,7 +270,7 @@
     }
 
     .notesScrollSection {
-      height: 400vh;
+      height: 1000vh;
       view-timeline: --horizontal block;
     }
 
@@ -305,7 +313,8 @@
     flex-direction: column;
     gap: 0rem; /* adjust */
 
-    @media (min-width: 1280px) {
+    /* text width */
+    @media (min-width: 672px) {
       flex-direction: row;
     }
 
@@ -422,7 +431,7 @@
       transform: scale(1) translate3d(0, 0, 0);
     }
     50% {
-      transform: scale(1.1) translate3d(-0.65rem, -1.3rem, 0);
+      transform: scale(1.15) translate3d(-0.9rem, -1.8rem, 0);
     }
     100% {
       transform: scale(1) translate3d(0, 0, 0);
@@ -458,6 +467,7 @@
     }
   }
 
+  /* this doesn't work when there's a default animation */
   .fold:hover,
   .fold:focus {
     transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
