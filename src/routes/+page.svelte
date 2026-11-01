@@ -1,4 +1,9 @@
-<script></script>
+<script>
+  import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
+  import crapt1 from "#lib/thumbnails/cra-pt1-dataviz.gif";
+  import powellst from "#lib/thumbnails/powellst.gif";
+  import psychholds from "#lib/thumbnails/psychholds.gif";
+</script>
 
 <svelte:head>
   <meta charset="utf-8" />
@@ -39,7 +44,7 @@
               <div class="noteContent">
                 <img
                   alt="Black families began moving to San Francisco in the 1940s seeking greater economic opportunity during World War II. Over the next few decades, they settled in neighborhoods from the Fillmore to the Bayview. The city's Black population reached its peak in 1970 before starting to decline. New data shows how the reversal reshaped every neighborhood, including three historically Black enclaves."
-                  src="../lib/thumbnails/blacksf-pt1-topper.gif"
+                  src={blacksf}
                 />
               </div>
 
@@ -52,7 +57,7 @@
               <div class="noteContent">
                 <img
                   alt="Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene."
-                  src="../lib/thumbnails/powellst.gif"
+                  src={powellst}
                 />
               </div>
 
@@ -81,7 +86,7 @@
               <div class="noteContent">
                 <img
                   alt="From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients"
-                  src="../lib/thumbnails/psychholds.gif"
+                  src={psychholds}
                 />
               </div>
 
@@ -94,7 +99,7 @@
               <div class="noteContent">
                 <img
                   alt="Behind locked drawers of file cabinets, in police departments all over California, sit documents no one is supposed to see.Known as clean-record agreements, they conceal the misconduct of hundreds of officers, helping them land new jobs in law enforcement. These documents have been secret — until this investigation."
-                  src="../lib/thumbnails/cra-pt1-dataviz.gif"
+                  src={crapt1}
                 />
               </div>
 
