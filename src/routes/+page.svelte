@@ -29,10 +29,14 @@
       data-oriented visual designer-developer experienced at transforming messy
       data and ideas into clear, insightful storytelling
     </p>
-    <p class="scrollInstructions">
-      scroll down to see past work 👇 click on or tab to a post-it to read more
-      🗒️
+    <p class="socialLinks">
+      <a
+        href="https://drive.google.com/file/d/1wZH1PEBVWHrw-L12Tg9NLdPZ7PnK-dnR/view?usp=sharing"
+        >resume</a
+      > <span class="interpunctStar">✶</span>
+      <a href="https://www.linkedin.com/in/kwonjs/">linkedin</a>
     </p>
+    <p class="scrollInstructions">scroll 👇</p>
   </div>
 
   <div class="notesScrollSection">
@@ -50,7 +54,7 @@
               </div>
 
               <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -154,6 +158,9 @@
       </ul>
     </div>
   </div>
+  <div class="footer">
+    <p>let's collaborate: kwonjseo at gmail dot com</p>
+  </div>
 </div>
 
 <style>
@@ -237,6 +244,36 @@
       letter-spacing: -0.01rem;
       font-size: 24px;
       font-weight: 400px;
+    }
+
+    .socialLinks {
+      /* "Futura PT", sans-serif; */
+      font-family: "jennymadeFontV2", sans-serif;
+      font-weight: 300;
+      letter-spacing: -0.01rem;
+      font-size: 2rem;
+      font-weight: 400px;
+
+      .interpunctStar {
+        font-size: 12px;
+        vertical-align: middle;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      a:active,
+      a:hover,
+      a:focus {
+        text-decoration-style: wavy;
+        text-decoration-line: underline;
+        text-decoration-thickness: 2.5px;
+        text-underline-offset: 1px;
+        text-decoration-skip-ink: auto;
+        text-decoration-color: #000;
+      }
     }
 
     .scrollInstructions {
@@ -523,11 +560,27 @@
       top: calc(var(--noteHeight) - 3rem);
       right: 0px;
     }
+
+    .innerTriangle > span {
+      font-size: 10px;
+      font-family: "jennymadeFontV2", sans-serif;
+    }
   }
 
   /* this doesn't work when there's a default animation */
   .fold:hover,
   .fold:focus {
     transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
+  }
+
+  .footer {
+    text-align: center;
+    font-family: "jennymadeFontV2";
+    font-size: 36px;
+    height: 10vh;
+
+    a {
+      text-decoration: none;
+    }
   }
 </style>
