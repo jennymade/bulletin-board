@@ -1,9 +1,9 @@
 <script>
-  import { asset } from "$app/paths";
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
   import crapt1 from "#lib/thumbnails/cra-pt1-dataviz.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
+  import covidwastewater from "#lib/thumbnails/covid-wastewater.gif";
 </script>
 
 <svelte:head>
@@ -27,7 +27,7 @@
     </div>
     <p>
       data-oriented visual designer-developer experienced at transforming messy
-      data and concepts of a plan into clear, insightful storytelling
+      data and ideas into clear, insightful storytelling
     </p>
     <p class="scrollInstructions">
       scroll down to see past work 👇 click on or tab to a post-it to read more
@@ -38,8 +38,8 @@
   <div class="notesScrollSection">
     <div class="notesParentWrapper">
       <ul class="notesScrollTrack">
-        <li class="designNotesContainer">
-          <h2 class="sectionHed">design</h2>
+        <li class="design notesContainer">
+          <h2 class="sectionHed">design<span>✴</span></h2>
           <ul>
             <li class="note design" tabIndex={0}>
               <div class="noteContent">
@@ -80,9 +80,22 @@
             </li>
           </ul>
         </li>
-        <li class="datavizNotesContainer">
-          <h2 class="sectionHed">dataviz</h2>
+        <li class="dataviz notesContainer">
+          <h2 class="sectionHed">dataviz<span>✧</span></h2>
           <ul>
+            <li class="note dataviz" tabIndex={0}>
+              <div class="noteContent">
+                <img
+                  alt="From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients"
+                  src={covidwastewater}
+                />
+              </div>
+
+              <div class="fold" tabIndex={0}>
+                <div class="innerTriangle"></div>
+                <div class="outerTriangle"></div>
+              </div>
+            </li>
             <li class="note dataviz" tabIndex={0}>
               <div class="noteContent">
                 <img
@@ -111,8 +124,8 @@
             </li>
           </ul>
         </li>
-        <li class="illustrationNotesContainer">
-          <h2 class="sectionHed">illustration</h2>
+        <li class="illustration notesContainer">
+          <h2 class="sectionHed">illustration<span>✽</span></h2>
           <ul>
             <li class="note illustration" tabIndex={0}>
               <div class="noteContent">
@@ -155,8 +168,8 @@
     --mobilePan: -50vw;
 
     @media screen and (max-width: 672px) {
-      --noteHeight: 10rem;
-      --noteHeight: 10rem;
+      --noteHeight: 15rem;
+      --noteWidth: 15rem;
       --mobilePan: -150vw;
     }
 
@@ -173,9 +186,9 @@
     --illoFold: rgba(207, 165, 230, 1);
 
     /* adjust: how much do you want each thumbnail to match the section color */
-    --noteFilter: opacity(85%);
-    /* adjust: how much do you want the thumbnail to take up the note area: 0-1*/
-    --noteVisibility: 0.9;
+    --noteFilter: opacity(90%);
+    /* adjust: how much do you want the thumbnail to take up the note area: 0 (hero image isn't visible at all) -1 (the note color isn't visible at all — only hero image (no border))*/
+    --noteVisibility: 1;
   }
 
   .whiteBoard {
@@ -233,7 +246,7 @@
     /* styling header section for mobile */
     @media (max-width: 640px) {
       text-align: left;
-      margin: 2rem;
+      margin: 1.5rem;
 
       .jennyfont {
         font-size: 84px;
@@ -269,6 +282,8 @@
     height: 100%;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
+
+    column-gap: clamp(10px, 20px, 30px);
   }
 
   /* styling for horizontal scrolling */
@@ -289,7 +304,8 @@
     }
 
     .notesScrollTrack {
-      width: var(--notesTotalWidth);
+      /* replacing var(--notesTotalWidth); */
+      width: max-content;
       overflow: visible;
       scroll-snap-type: none;
       animation: pan 1ms linear both;
@@ -302,7 +318,8 @@
         transform: translate3d(0, 0, 0);
       }
       to {
-        transform: translate3d(var(--mobilePan), 0, 0);
+        /* transform: translate3d(var(--mobilePan), 0, 0); */
+        transform: translate3d(calc(100vw - 100%), 0, 0);
       }
     }
   }
@@ -320,7 +337,6 @@
   .notesParentWrapper {
     display: flex;
     flex-direction: column;
-    gap: 0rem; /* adjust */
 
     /* text width */
     @media (min-width: 672px) {
@@ -331,34 +347,66 @@
     position: sticky;
     top: 0;
     height: 100vh;
-    border: 2px solid #000;
     overflow: hidden;
+
+    /* for debugging */
+    /* border: 2px solid #000; */
   }
 
-  .designNotesContainer,
-  .datavizNotesContainer,
-  .illustrationNotesContainer {
+  .notesContainer {
     width: 50vw;
-    height: 95vh; /* adjust if needed */
-    flex: 2;
+    /* should i just instead do flex-basis: 50vw; */
+    flex: 0 0 50vw; /* setting base size of each section to 50vw */
     margin: 0 auto;
-    border: 1px solid #000; /* for debugging */
+
+    /* for debugging */
+    /* border: 1px solid #000; */
+
+    span {
+      font-size: 36px;
+      vertical-align: text-top;
+      padding-left: 6px;
+    }
+
+    ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+
+      width: 100%;
+      max-width: calc(
+        var(--noteWidth) * 2 + 1rem
+      ); /* max of two notes in one row */
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* for mobile widths */
+    @media (max-width: 672px) {
+      width: 100vw;
+      flex-basis: 100vw;
+    }
   }
 
-  .designNotesContainer > ul,
-  .datavizNotesContainer > ul,
-  .illustrationNotesContainer > ul {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+  .notesContainer.design span {
+    color: var(--designFold);
+  }
 
-    width: 100%;
-    max-width: calc(
-      var(--noteWidth) * 2 + 1rem
-    ); /* max of two notes in one row */
-    margin: 0 auto;
-    padding: 0;
+  .notesContainer.dataviz span {
+    color: var(--datavizFold);
+  }
+
+  .notesContainer.illustration span {
+    color: var(--illoFold);
+  }
+
+  /* this style applies to whichever notesContainer section is FIRST (in this case, design) */
+  .notesContainer.design {
+    /* to counter the 1rem margin */
+    @media (max-width: 672px) {
+      margin-left: -3rem;
+    }
   }
 
   .note {
@@ -371,10 +419,11 @@
     transform: rotate(random(-2.5deg, 2.5deg));
   }
 
+  /* keyboard accessibility */
   .note:active,
   .note:focus {
     /* change color based on section */
-    outline: 2.5px dashed #000;
+    outline: 3px dashed #000;
   }
 
   /* matching fold colors based on section */
