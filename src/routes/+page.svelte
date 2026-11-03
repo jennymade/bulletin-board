@@ -4,6 +4,9 @@
   import powellst from "#lib/thumbnails/powellst.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
   import covidwastewater from "#lib/thumbnails/covid-wastewater.gif";
+  import koreancomfortfood from "#lib/thumbnails/koreancomfortfood.gif";
+  import birdmigration from "#lib/thumbnails/birdmigration.gif";
+  import satellites from "#lib/thumbnails/satellites.gif";
 </script>
 
 <svelte:head>
@@ -135,8 +138,10 @@
           <ul>
             <li class="note illustration" tabIndex={0}>
               <div class="noteContent">
-                <h4 class="noteHed">illo work</h4>
-                <p class="noteDesc"></p>
+                <img
+                  alt="A gif rotating between illustrations of galbitang, soondaeguk, kimbap, tteokmanduguk and the taeguk half red half blue symbol all framed within the korean flag"
+                  src={koreancomfortfood}
+                />
               </div>
 
               <div class="fold">
@@ -146,8 +151,23 @@
             </li>
             <li class="note illustration" tabIndex={0}>
               <div class="noteContent">
-                <h4 class="noteHed">illo work</h4>
-                <p class="noteDesc"></p>
+                <img
+                  alt="A gif rotating between illustrations of Coyote Hills, Farallon Islands and Rodeo Lagoon, three important stops in the Bay Area for bird migration pathways"
+                  src={birdmigration}
+                />
+              </div>
+
+              <div class="fold illustration">
+                <div class="innerTriangle"><span>read more</span></div>
+                <div class="outerTriangle"></div>
+              </div>
+            </li>
+            <li class="note illustration" tabIndex={0}>
+              <div class="noteContent">
+                <img
+                  alt="Low Earth orbit satellites orbit points on the Earth and are much closer to the ground. They can link with other satellites to create internet connectivity and are the ones made by Starlink. Geostationary orbit satellites fly much higher above earth and stay parked above a fixed point on the equator. They're typically used by satellite TV providers to provide broad service coverage."
+                  src={satellites}
+                />
               </div>
 
               <div class="fold illustration">
@@ -195,7 +215,7 @@
     --illoFold: rgba(207, 165, 230, 1);
 
     /* adjust: how much do you want each thumbnail to match the section color */
-    --noteFilter: opacity(90%);
+    --noteFilter: opacity(95%);
     /* adjust: how much do you want the thumbnail to take up the note area: 0 (hero image isn't visible at all) -1 (the note color isn't visible at all — only hero image (no border))*/
     --noteVisibility: 1;
   }
@@ -533,7 +553,8 @@
     position: absolute;
     left: 50%;
     top: 50%;
-    transform: translate(-50%, -50%);
+    /* the -49 instead of -50% to correct for the minor bottom border */
+    transform: translate(-50%, -49%);
   }
 
   .noteContent > img {
@@ -551,8 +572,9 @@
     0% {
       transform: scale(1) translate3d(0, 0, 0);
     }
+    /* adjut this spacing */
     50% {
-      transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
+      transform: scale(1.5) translate3d(-40px, -80px, 0);
     }
     100% {
       transform: scale(1) translate3d(0, 0, 0);
