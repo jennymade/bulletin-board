@@ -1,8 +1,8 @@
 <script>
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
-  import crapt1 from "#lib/thumbnails/cra-pt1-dataviz.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
+  import crapt1dataviz from "#lib/thumbnails/cra-pt1-dv.gif";
   import covidwastewater from "#lib/thumbnails/covid-wastewater.gif";
   import koreancomfortfood from "#lib/thumbnails/koreancomfortfood.gif";
   import birdmigration from "#lib/thumbnails/birdmigration.gif";
@@ -122,7 +122,7 @@
               <div class="noteContent">
                 <img
                   alt="Behind locked drawers of file cabinets, in police departments all over California, sit documents no one is supposed to see.Known as clean-record agreements, they conceal the misconduct of hundreds of officers, helping them land new jobs in law enforcement. These documents have been secret — until this investigation."
-                  src={crapt1}
+                  src={crapt1dataviz}
                 />
               </div>
 
