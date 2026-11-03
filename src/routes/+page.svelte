@@ -53,7 +53,7 @@
                 />
               </div>
 
-              <div class="fold" tabIndex={0}>
+              <div class="fold design">
                 <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
@@ -66,8 +66,8 @@
                 />
               </div>
 
-              <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold design">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -77,8 +77,8 @@
                 <p class="noteDesc"></p>
               </div>
 
-              <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -95,8 +95,8 @@
                 />
               </div>
 
-              <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -108,8 +108,8 @@
                 />
               </div>
 
-              <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -121,8 +121,8 @@
                 />
               </div>
 
-              <div class="fold dataviz" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold dataviz">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -137,8 +137,8 @@
                 <p class="noteDesc"></p>
               </div>
 
-              <div class="fold" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -148,8 +148,8 @@
                 <p class="noteDesc"></p>
               </div>
 
-              <div class="fold illustration" tabIndex={0}>
-                <div class="innerTriangle"></div>
+              <div class="fold illustration">
+                <div class="innerTriangle"><span>read more</span></div>
                 <div class="outerTriangle"></div>
               </div>
             </li>
@@ -526,7 +526,7 @@
       transform: scale(1) translate3d(0, 0, 0);
     }
     50% {
-      transform: scale(1.15) translate3d(-0.9rem, -1.8rem, 0);
+      transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
     }
     100% {
       transform: scale(1) translate3d(0, 0, 0);
@@ -534,7 +534,8 @@
   }
 
   .fold {
-    animation: 5s foldUp ease-in-out;
+    /* more seconds --> slower animation (reduce motion sickness)*/
+    animation: 7.5s foldUp ease-in-out;
     animation-iteration-count: infinite;
     transition: transform 400ms ease-in-out;
     /* z-index: 2; */
@@ -562,8 +563,13 @@
     }
 
     .innerTriangle > span {
-      font-size: 10px;
+      color: #000;
+      font-size: 12px;
       font-family: "jennymadeFontV2", sans-serif;
+      position: absolute;
+      top: -24px;
+      left: 20px;
+      z-index: 2; /* on top of the innerTriangle fold */
     }
   }
 
@@ -576,11 +582,13 @@
   .footer {
     text-align: center;
     font-family: "jennymadeFontV2";
+    margin: 1rem;
     font-size: 36px;
     height: 10vh;
 
-    a {
-      text-decoration: none;
+    /* for mobile */
+    @media (max-width: 640px) {
+      text-align: left;
     }
   }
 </style>
