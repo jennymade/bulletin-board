@@ -26,8 +26,8 @@
       </h1>
     </div>
     <p>
-      data-oriented visual designer-developer experienced at transforming messy
-      data and ideas into clear, insightful storytelling
+      data-oriented visual designer-developer experienced at ideating, grabbing
+      and transforming messy data into clear, insightful storytelling
     </p>
     <p class="socialLinks">
       <a
@@ -36,7 +36,9 @@
       > <span class="interpunctStar">✶</span>
       <a href="https://www.linkedin.com/in/kwonjs/">linkedin</a>
     </p>
-    <p class="scrollInstructions">scroll 👇</p>
+    <p class="scrollInstructions">
+      keep scrolling <span class="scrollIndicator">👇</span>
+    </p>
   </div>
 
   <div class="notesScrollSection">
@@ -219,7 +221,9 @@
     font-family: sans-serif;
     background-color: white;
     /* border: 1.5px solid #c9c9c9; */
-    padding: 1rem;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 0.5rem; /* adjust */
     margin: 1rem auto;
     max-width: 640px;
     text-align: center;
@@ -277,7 +281,7 @@
     }
 
     .scrollInstructions {
-      font-size: 18px;
+      font-size: 24px !important;
     }
 
     /* styling header section for mobile */
@@ -300,6 +304,23 @@
       .scrollInstructions {
         font-size: 18px;
       }
+    }
+  }
+
+  /* animating the scroll indicator */
+  /* you can't nest this inside website header */
+  .scrollIndicator {
+    display: inline-block;
+    animation: bounce 2s infinite ease-in-out;
+  }
+
+  @keyframes bounce {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, 5px, 0);
     }
   }
 
@@ -395,10 +416,13 @@
     /* should i just instead do flex-basis: 50vw; */
     flex: 0 0 50vw; /* setting base size of each section to 50vw */
     margin: 0 auto;
+    /* why is there so much space between website header and notesContainer */
+    margin-top: -3rem;
 
     /* for debugging */
     /* border: 1px solid #000; */
 
+    /* the color symbol by each sectionHed */
     span {
       font-size: 36px;
       vertical-align: text-top;
@@ -513,6 +537,8 @@
   }
 
   .noteContent > img {
+    /* object fit isn't working for some reason */
+    object-fit: contain;
     filter: var(--noteFilter);
     width: calc(var(--noteWidth) * var(--noteVisibility));
     height: calc(var(--noteHeight) * var(--noteVisibility));
