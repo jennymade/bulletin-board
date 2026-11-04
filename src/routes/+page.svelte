@@ -1,4 +1,5 @@
-<script>
+<script lang="ts">
+  /* hero gif imports */
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
@@ -7,6 +8,110 @@
   import koreancomfortfood from "#lib/thumbnails/koreancomfortfood.gif";
   import birdmigration from "#lib/thumbnails/birdmigration.gif";
   import satellites from "#lib/thumbnails/satellites.gif";
+
+  /** note specific**/
+  import NoteCard from "#lib/components/NoteCard.svelte";
+
+  type Note = {
+    id: string;
+    image?: string;
+    alt?: string;
+    title?: string;
+    description?: string;
+  };
+
+  type Section = {
+    category: "design" | "dataviz" | "illustration";
+    heading: string;
+    symbol: string;
+    notes: Note[];
+  };
+
+  /* where you can adjust which projects you show in each section */
+  const sections: Section[] = [
+    {
+      category: "design",
+      heading: "design",
+      symbol: "✴",
+      notes: [
+        {
+          id: "blacksf",
+          image: blacksf,
+          alt: "Keep the current Black SF alt text.",
+        },
+        {
+          id: "powellst",
+          image: powellst,
+          alt: "Keep the current Powell Street alt text.",
+        },
+        { id: "design-work", title: "design work" },
+      ],
+    },
+    {
+      category: "dataviz",
+      heading: "dataviz",
+      symbol: "✧",
+      notes: [
+        {
+          id: "covidwastewater",
+          image: covidwastewater,
+          alt: "Keep the current alt text.",
+        },
+        {
+          id: "psychholds",
+          image: psychholds,
+          alt: "Keep the current alt text.",
+        },
+        {
+          id: "clean-records",
+          image: crapt1dataviz,
+          alt: "Keep the current alt text.",
+        },
+      ],
+    },
+    {
+      category: "illustration",
+      heading: "illustration",
+      symbol: "✽",
+      notes: [
+        {
+          id: "korean-food",
+          image: koreancomfortfood,
+          alt: "Keep the current alt text.",
+        },
+        {
+          id: "bird-migration",
+          image: birdmigration,
+          alt: "Keep the current alt text.",
+        },
+        {
+          id: "satellites",
+          image: satellites,
+          alt: "Keep the current alt text.",
+        },
+      ],
+    },
+  ];
+
+  /** modal-specific **/
+  let dialog = $state<HTMLDialogElement | undefined>(undefined);
+  let visible = $state(false);
+
+  function openDetails() {
+    dialog?.showModal();
+    visible = true;
+  }
+
+  function closeModal() {
+    dialog?.close();
+    visible = false;
+  }
+
+  function closeOnBackdrop(event: MouseEvent) {
+    // A backdrop click targets the dialog itself
+    // Clicks on the panel's contents target those elements instead
+    if (event.target === dialog) dialog.close();
+  }
 </script>
 
 <svelte:head>
@@ -47,11 +152,39 @@
   <div class="notesScrollSection">
     <div class="notesParentWrapper">
       <ul class="notesScrollTrack">
-        <li class="design notesContainer">
+        {#each sections as section (section.category)}
+          <li class="{section.category} notesContainer">
+            <h2 class="sectionHed">
+              {section.heading}<span>{section.symbol}</span>
+            </h2>
+
+            <ul>
+              {#each section.notes as note (note.id)}
+                <NoteCard
+                  {note}
+                  category={section.category}
+                  activate={openDetails}
+                />
+              {/each}
+            </ul>
+          </li>
+        {/each}
+        <!-- <li class="design notesContainer">
           <h2 class="sectionHed">design<span>✴</span></h2>
           <ul>
-            <li class="note design" tabIndex={0}>
-              <div class="noteContent">
+            <li class="note design">
+              <div
+                class="noteContent"
+                tabindex={0}
+                role="button"
+                onclick={openDetails}
+                onkeydown={(event) => {
+                  if (event.key === "Enter" || event.key === " ") {
+                    event.preventDefault();
+                    openDetails();
+                  }
+                }}
+              >
                 <img
                   alt="Black families began moving to San Francisco in the 1940s seeking greater economic opportunity during World War II. Over the next few decades, they settled in neighborhoods from the Fillmore to the Bayview. The city's Black population reached its peak in 1970 before starting to decline. New data shows how the reversal reshaped every neighborhood, including three historically Black enclaves."
                   src={blacksf}
@@ -176,13 +309,23 @@
               </div>
             </li>
           </ul>
-        </li>
+        </li> -->
       </ul>
     </div>
   </div>
   <div class="footer">
     <p>let's collaborate: kwonjseo at gmail dot com</p>
   </div>
+
+  <!-- modal after clicking on each note -->
+  {#if visible}
+    <!-- HTML *must not* be changed! -->
+    <dialog bind:this={dialog} class="backdrop-blur" onclose={closeModal}>
+      <h1>TKTK Title</h1>
+      <p>It's dangerous to go alone! Take this.</p>
+      <button type="button" onclick={closeModal}>close modal</button>
+    </dialog>
+  {/if}
 </div>
 
 <style>
@@ -501,8 +644,8 @@
   }
 
   /* keyboard accessibility */
-  .note:active,
-  .note:focus {
+  .noteContent:active,
+  .noteContent:focus {
     /* change color based on section */
     outline: 3px dashed #000;
   }
@@ -626,7 +769,6 @@
   .fold:focus {
     transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
   }
-
   .footer {
     text-align: center;
     font-family: "jennymadeFontV2";
@@ -638,5 +780,10 @@
     @media (max-width: 640px) {
       text-align: left;
     }
+  }
+
+  /* styling the modal */
+  .backdrop-blur::backdrop {
+    backdrop-filter: blur(8px);
   }
 </style>
