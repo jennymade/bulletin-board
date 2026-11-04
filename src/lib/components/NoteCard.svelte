@@ -172,8 +172,8 @@
       font-size: 12px;
       font-family: "jennymadeFontV2", sans-serif;
       position: absolute;
-      top: -24px;
-      left: 20px;
+      top: -25px;
+      left: 25px;
       z-index: 2; /* on top of the innerTriangle fold */
     }
   }

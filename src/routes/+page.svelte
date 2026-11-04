@@ -37,12 +37,12 @@
         {
           id: "blacksf",
           image: blacksf,
-          alt: "Keep the current Black SF alt text.",
+          alt: "Black families began moving to San Francisco in the 1940s seeking greater economic opportunity during World War II. Over the next few decades, they settled in neighborhoods from the Fillmore to the Bayview. The city's Black population reached its peak in 1970 before starting to decline. New data shows how the reversal reshaped every neighborhood, including three historically Black enclaves.",
         },
         {
           id: "powellst",
           image: powellst,
-          alt: "Keep the current Powell Street alt text.",
+          alt: "Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene.",
         },
         { id: "design-work", title: "design work" },
       ],
@@ -55,17 +55,17 @@
         {
           id: "covidwastewater",
           image: covidwastewater,
-          alt: "Keep the current alt text.",
+          alt: "From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients",
         },
         {
           id: "psychholds",
           image: psychholds,
-          alt: "Keep the current alt text.",
+          alt: "From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients",
         },
         {
           id: "clean-records",
           image: crapt1dataviz,
-          alt: "Keep the current alt text.",
+          alt: "Behind locked drawers of file cabinets, in police departments all over California, sit documents no one is supposed to see.Known as clean-record agreements, they conceal the misconduct of hundreds of officers, helping them land new jobs in law enforcement. These documents have been secret — until this investigation.",
         },
       ],
     },
@@ -77,17 +77,17 @@
         {
           id: "korean-food",
           image: koreancomfortfood,
-          alt: "Keep the current alt text.",
+          alt: "A gif rotating between illustrations of galbitang, soondaeguk, kimbap, tteokmanduguk and the taeguk half red half blue symbol all framed within the korean flag",
         },
         {
           id: "bird-migration",
           image: birdmigration,
-          alt: "Keep the current alt text.",
+          alt: "A gif rotating between illustrations of Coyote Hills, Farallon Islands and Rodeo Lagoon, three important stops in the Bay Area for bird migration pathways",
         },
         {
           id: "satellites",
           image: satellites,
-          alt: "Keep the current alt text.",
+          alt: "Low Earth orbit satellites orbit points on the Earth and are much closer to the ground. They can link with other satellites to create internet connectivity and are the ones made by Starlink. Geostationary orbit satellites fly much higher above earth and stay parked above a fixed point on the equator. They're typically used by satellite TV providers to provide broad service coverage.",
         },
       ],
     },
@@ -105,12 +105,6 @@
   function closeModal() {
     dialog?.close();
     visible = false;
-  }
-
-  function closeOnBackdrop(event: MouseEvent) {
-    // A backdrop click targets the dialog itself
-    // Clicks on the panel's contents target those elements instead
-    if (event.target === dialog) dialog.close();
   }
 </script>
 
@@ -169,147 +163,6 @@
             </ul>
           </li>
         {/each}
-        <!-- <li class="design notesContainer">
-          <h2 class="sectionHed">design<span>✴</span></h2>
-          <ul>
-            <li class="note design">
-              <div
-                class="noteContent"
-                tabindex={0}
-                role="button"
-                onclick={openDetails}
-                onkeydown={(event) => {
-                  if (event.key === "Enter" || event.key === " ") {
-                    event.preventDefault();
-                    openDetails();
-                  }
-                }}
-              >
-                <img
-                  alt="Black families began moving to San Francisco in the 1940s seeking greater economic opportunity during World War II. Over the next few decades, they settled in neighborhoods from the Fillmore to the Bayview. The city's Black population reached its peak in 1970 before starting to decline. New data shows how the reversal reshaped every neighborhood, including three historically Black enclaves."
-                  src={blacksf}
-                />
-              </div>
-
-              <div class="fold design">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note design" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene."
-                  src={powellst}
-                />
-              </div>
-
-              <div class="fold design">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note design" tabIndex={0}>
-              <div class="noteContent">
-                <h4 class="noteHed">design work</h4>
-                <p class="noteDesc"></p>
-              </div>
-
-              <div class="fold">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li class="dataviz notesContainer">
-          <h2 class="sectionHed">dataviz<span>✧</span></h2>
-          <ul>
-            <li class="note dataviz" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients"
-                  src={covidwastewater}
-                />
-              </div>
-
-              <div class="fold">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note dataviz" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients"
-                  src={psychholds}
-                />
-              </div>
-
-              <div class="fold">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note dataviz" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="Behind locked drawers of file cabinets, in police departments all over California, sit documents no one is supposed to see.Known as clean-record agreements, they conceal the misconduct of hundreds of officers, helping them land new jobs in law enforcement. These documents have been secret — until this investigation."
-                  src={crapt1dataviz}
-                />
-              </div>
-
-              <div class="fold dataviz">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-          </ul>
-        </li>
-        <li class="illustration notesContainer">
-          <h2 class="sectionHed">illustration<span>✽</span></h2>
-          <ul>
-            <li class="note illustration" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="A gif rotating between illustrations of galbitang, soondaeguk, kimbap, tteokmanduguk and the taeguk half red half blue symbol all framed within the korean flag"
-                  src={koreancomfortfood}
-                />
-              </div>
-
-              <div class="fold">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note illustration" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="A gif rotating between illustrations of Coyote Hills, Farallon Islands and Rodeo Lagoon, three important stops in the Bay Area for bird migration pathways"
-                  src={birdmigration}
-                />
-              </div>
-
-              <div class="fold illustration">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-            <li class="note illustration" tabIndex={0}>
-              <div class="noteContent">
-                <img
-                  alt="Low Earth orbit satellites orbit points on the Earth and are much closer to the ground. They can link with other satellites to create internet connectivity and are the ones made by Starlink. Geostationary orbit satellites fly much higher above earth and stay parked above a fixed point on the equator. They're typically used by satellite TV providers to provide broad service coverage."
-                  src={satellites}
-                />
-              </div>
-
-              <div class="fold illustration">
-                <div class="innerTriangle"><span>read more</span></div>
-                <div class="outerTriangle"></div>
-              </div>
-            </li>
-          </ul>
-        </li> -->
       </ul>
     </div>
   </div>
