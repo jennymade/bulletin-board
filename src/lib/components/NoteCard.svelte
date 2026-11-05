@@ -1,11 +1,12 @@
 <script lang="ts">
   /* add one or two more categories (e.g. on camera) if needed*/
-  type Category = "design" | "dataviz" | "illustration " | "research";
+  type Category =
+    string; /* "design" | "dataviz" | "illustration " | "research" */
 
   type Note = {
     id: string;
     image?: string;
-    alt: string;
+    alt?: string;
     title?: string;
     description?: string;
   };
@@ -20,20 +21,23 @@
 </script>
 
 <li class="note {category}">
-  <button
-    class="noteContent"
-    tabindex="0"
-    type="button"
-    aria-haspopup="dialog"
-    onclick={activate}
-  >
+  <div class="noteContent">
     {#if note.image}
       <img src={note.image} alt={note.alt ?? ""} />
     {/if}
-  </button>
+  </div>
 
-  <div class="fold {category}" aria-hidden="true">
-    <div class="innerTriangle"><span>read more</span></div>
+  <div class="fold {category}">
+    <div
+      class="innerTriangle"
+      tabindex="0"
+      type="button"
+      aria-role="button"
+      aria-haspopup="dialog"
+      onclick={activate}
+    >
+      <span>click!</span>
+    </div>
     <div class="outerTriangle"></div>
   </div>
 </li>

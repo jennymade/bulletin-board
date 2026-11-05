@@ -9,10 +9,13 @@
   import koreancomfortfood from "#lib/thumbnails/koreancomfortfood.gif";
   import birdmigration from "#lib/thumbnails/birdmigration.gif";
   import satellites from "#lib/thumbnails/satellites.gif";
+  import airbnbsf from "#lib/thumbnails/airbnbsf.gif";
+  import aigovusage from "#lib/thumbnails/aigovusage.gif";
 
   /** note specific**/
   import NoteCard from "#lib/components/NoteCard.svelte";
 
+  /* alt is non-negotiable if image is involved */
   type Note = {
     id: string;
     image?: string;
@@ -21,8 +24,9 @@
     description?: string;
   };
 
+  /* design | dataviz | illustration | research */
   type Section = {
-    category: "design" | "dataviz" | "illustration" | "research";
+    category: string;
     heading: string;
     symbol: string;
     notes: Note[];
@@ -100,7 +104,18 @@
       category: "research",
       heading: "research",
       symbol: "❖",
-      notes: [{ id: "airbnb" }, { id: "aigovuse" }],
+      notes: [
+        {
+          id: "airbnbsf",
+          image: airbnbsf,
+          alt: "In 2017, the Mission District had the largest share of Airbnb listings in San Francisco with 12.5% while the Downtown/Civic Center area had under half of that at 5.4% of the city's listings. Nearly a decade later, Downtown/Civic Center now has the largest share of Airbnb listings in the city with 9.7% while the Mission District has dropped to 7.5% of the city's listings due to the city's new short-term rental regulations and enforcement as well as COVID-19's impact on tourism and travel patterns.",
+        },
+        {
+          id: "aigovusage",
+          image: aigovusage,
+          alt: "Since introducing Copilot to its staff mid-last year, San Francisco's city government's usage of the AI assistant over doubled between July 2025 and March 2026, measured by messages sent and received.",
+        },
+      ],
     },
   ];
 
@@ -116,6 +131,13 @@
   function closeModal() {
     dialog?.close();
     visible = false;
+  }
+
+  /* for copying email */
+  function copyEmailToClipboard() {
+    navigator.clipboard.writeText("kwonjseo@gmail.com");
+    /* this animation currently only runs once because copyIndicator now has the class showCopyIndicator*/
+    document.getElementById("copyIndicator").classList.add("showCopyIndicator");
   }
 </script>
 
@@ -191,7 +213,11 @@
     </div>
   </div>
   <div class="footer">
-    <p>let's collaborate: kwonjseo at gmail dot com</p>
+    <p>
+      let's collaborate: <span class="email" onclick={copyEmailToClipboard}
+        >kwonjseo at gmail dot com</span
+      ><span id="copyIndicator">copied!</span>
+    </p>
   </div>
 </div>
 
@@ -574,6 +600,41 @@
     /* for mobile */
     @media (max-width: 640px) {
       text-align: left;
+    }
+
+    .email:hover,
+    .email:focus,
+    .email:active {
+      cursor: pointer;
+      text-decoration-style: wavy;
+      text-decoration-line: underline;
+      text-decoration-thickness: 2.5px;
+      text-underline-offset: 1px;
+      text-decoration-skip-ink: auto;
+      text-decoration-color: #000;
+    }
+  }
+
+  #copyIndicator {
+    opacity: 0;
+    vertical-align: text-top;
+    font-size: 18px;
+  }
+
+  .showCopyIndicator {
+    /* opacity: 0; */
+    vertical-align: text-top;
+    font-size: 18px;
+    text-decoration: none !important;
+    animation: disappear 2s 1 ease-in-out;
+  }
+
+  @keyframes disappear {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
     }
   }
 
