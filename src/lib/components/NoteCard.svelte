@@ -21,21 +21,21 @@
 </script>
 
 <li class="note {category}">
-  <div class="noteContent">
+  <div
+    class="noteContent"
+    tabindex="0"
+    type="button"
+    aria-role="button"
+    aria-haspopup="dialog"
+    onclick={activate}
+  >
     {#if note.image}
       <img src={note.image} alt={note.alt ?? ""} />
     {/if}
   </div>
 
   <div class="fold {category}">
-    <div
-      class="innerTriangle"
-      tabindex="0"
-      type="button"
-      aria-role="button"
-      aria-haspopup="dialog"
-      onclick={activate}
-    >
+    <div class="innerTriangle">
       <span>click!</span>
     </div>
     <div class="outerTriangle"></div>

@@ -15,7 +15,7 @@
   /** note specific**/
   import NoteCard from "#lib/components/NoteCard.svelte";
 
-  /* alt is non-negotiable if image is involved */
+  /* alt desc is non-negotiable if image is involved */
   type Note = {
     id: string;
     image?: string;
@@ -24,12 +24,22 @@
     description?: string;
   };
 
-  /* design | dataviz | illustration | research */
+  /* replaced design | dataviz | illustration | research with string*/
   type Section = {
     category: string;
     heading: string;
     symbol: string;
     notes: Note[];
+  };
+
+  /* what should populate in each modal */
+  /* nope — get this all from 'sections' instead of making a new Array of objects */
+  type ProjectDescription = {
+    id: string;
+    title: string;
+    desc: string;
+    image1?: string;
+    image2?: string;
   };
 
   /* where you can adjust which projects you show in each section */
@@ -86,6 +96,7 @@
         {
           id: "korean-food",
           image: koreancomfortfood,
+          title: "Illustrating Korean comfort food in the Bay Area",
           alt: "A gif rotating between illustrations of galbitang, soondaeguk, kimbap, tteokmanduguk and the taeguk half red half blue symbol all framed within the korean flag",
         },
         {
@@ -108,29 +119,45 @@
         {
           id: "airbnbsf",
           image: airbnbsf,
+          title:
+            "Visualizing and analyzing Airbnb listings in San Francisco by neighborhood",
           alt: "In 2017, the Mission District had the largest share of Airbnb listings in San Francisco with 12.5% while the Downtown/Civic Center area had under half of that at 5.4% of the city's listings. Nearly a decade later, Downtown/Civic Center now has the largest share of Airbnb listings in the city with 9.7% while the Mission District has dropped to 7.5% of the city's listings due to the city's new short-term rental regulations and enforcement as well as COVID-19's impact on tourism and travel patterns.",
         },
         {
           id: "aigovusage",
           image: aigovusage,
+          title: "FOIAing San Francisco's government AI usage",
           alt: "Since introducing Copilot to its staff mid-last year, San Francisco's city government's usage of the AI assistant over doubled between July 2025 and March 2026, measured by messages sent and received.",
         },
       ],
     },
   ];
 
+  // const projectdescriptions: ProjectDescription[] = [
+  //   {
+  //     id: "TKTK",
+  //     title: "TKTK",
+  //     desc: "TKTK",
+  //     image1: "TKTKT",
+  //     image2: "TKTK",
+  //   },
+  // ];
+
   /** modal-specific **/
   let dialog = $state<HTMLDialogElement | undefined>(undefined);
   let visible = $state(false);
+  let selectedNoteTitle = $state<string | undefined>(undefined);
 
-  function openDetails() {
+  function openDetails(Note?: { id: string; title: string }) {
     dialog?.showModal();
     visible = true;
+    selectedNoteTitle = Note?.title;
   }
 
   function closeModal() {
     dialog?.close();
     visible = false;
+    selectedNoteTitle = undefined;
   }
 
   /* for copying email */
@@ -190,22 +217,25 @@
                 <NoteCard
                   {note}
                   category={section.category}
-                  activate={openDetails}
+                  activate={() => openDetails(note)}
                 />
               {/each}
             </ul>
           </li>
           <!-- modal after clicking on each note -->
           {#if visible}
-            <!-- HTML *must not* be changed! -->
             <dialog
               bind:this={dialog}
-              class="backdrop-blur"
+              class="modal backdrop-blur"
               onclose={closeModal}
             >
-              <h1>TKTK Title</h1>
-              <p>It's dangerous to go alone! Take this.</p>
-              <button type="button" onclick={closeModal}>exit</button>
+              <h2 class="projectTitle">
+                {selectedNoteTitle}
+              </h2>
+              <p class="projectDesc">Insert takeaways from the project here</p>
+              <button class="closeModal" type="button" onclick={closeModal}
+                >x</button
+              >
             </dialog>
           {/if}
         {/each}
@@ -213,11 +243,11 @@
     </div>
   </div>
   <div class="footer">
-    <p>
+    <div>
       let's collaborate: <span class="email" onclick={copyEmailToClipboard}
         >kwonjseo at gmail dot com</span
       ><span id="copyIndicator">copied!</span>
-    </p>
+    </div>
   </div>
 </div>
 
@@ -259,14 +289,14 @@
     --noteVisibility: 1;
   }
 
+  :global(body) {
+    cursor: none;
+  }
+
   .whiteBoard {
-    /* silver border to mimic irl whiteboard */
+    cursor: url("src/lib/cursor/cursorWhiteboardMarker.png"), auto;
     background-color: var(--whiteboardColor);
     border-radius: 0.5rem;
-    border:
-      var(--wbBorder) solid #dddddd 0 4px 8px 0 rgba(0, 0, 0, 0.2),
-      0 4px 8px 0 rgba(0, 0, 0, 0.2);
-
     /* overflow-y: auto; */
     height: 100vh;
 
@@ -364,6 +394,10 @@
         font-size: 18px;
       }
     }
+  }
+
+  ul {
+    list-style: none;
   }
 
   /* animating the scroll indicator */
@@ -557,39 +591,6 @@
     }
   }
 
-  .note {
-    flex: 0 1 var(--noteWidth);
-    min-width: 0;
-    position: relative;
-    max-height: var(--maxHeight);
-    height: var(--noteHeight);
-    width: var(--noteWidth);
-    transform: rotate(random(-2.5deg, 2.5deg));
-  }
-
-  /* keyboard accessibility */
-  .noteContent:active,
-  .noteContent:focus {
-    /* change color based on section */
-    outline: 3px dashed #000;
-  }
-
-  ul {
-    list-style-type: none;
-  }
-
-  .noteHed {
-    font-family: "Futura PT", sans-serif;
-    font-weight: 300;
-    font-size: 24px;
-    line-height: 1;
-  }
-
-  /* .noteDesc {
-    font-family: "jennymadeFontV1", sans-serif;
-    font-size: 36px;
-  } */
-
   .footer {
     text-align: center;
     font-family: "jennymadeFontV2";
@@ -616,6 +617,7 @@
   }
 
   #copyIndicator {
+    display: inline-block;
     opacity: 0;
     vertical-align: text-top;
     font-size: 18px;
@@ -632,11 +634,15 @@
   @keyframes disappear {
     0% {
       opacity: 1;
+      transform: translate3d(0, 0, 0);
     }
     100% {
       opacity: 0;
+      transform: translate3d(0, -10px, 0);
     }
   }
+
+  /* styling the modal */
 
   dialog {
     background-color: #fff;
@@ -645,8 +651,39 @@
     width: 80vw;
   }
 
-  /* styling the modal */
   .backdrop-blur::backdrop {
     backdrop-filter: blur(4px);
+  }
+
+  .modal {
+    .projectTitle {
+      padding: 0 2rem 0 2rem;
+      font-family: "Futura PT", sans-serif;
+      font-size: 36px;
+      font-weight: 700;
+    }
+
+    .projectDesc {
+      padding: 0 2rem 0 2rem;
+      font-family: "Futura PT", sans-serif;
+      font-size: 24px;
+      font-weight: 300;
+    }
+
+    .closeModal {
+      font-family: "jennymadeFontV2", sans-serif;
+      font-size: 36px;
+      background: none;
+      border: none;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+    }
+
+    .closeModal:hover,
+    .closeModal:focus {
+      cursor: pointer;
+      border: 2px dashed #000;
+    }
   }
 </style>
