@@ -1,6 +1,6 @@
 <script lang="ts">
   /* add one or two more categories (e.g. on camera) if needed*/
-  type Category = "design" | "dataviz" | "illustration";
+  type Category = "design" | "dataviz" | "illustration " | "research";
 
   type Note = {
     id: string;
@@ -58,10 +58,14 @@
     transform: rotate(random(-2.5deg, 2.5deg));
   }
 
+  .noteContent:hover {
+    filter: drop-shadow(-10px -10px 10px #ccc);
+  }
+
   /* keyboard accessibility */
   .noteContent:active,
   .noteContent:focus {
-    /* change color based on section */
+    filter: drop-shadow(-10px -10px 10px #ccc);
     outline: 3px dashed #000;
   }
 
@@ -87,6 +91,14 @@
 
     .innerTriangle {
       border-top: calc(var(--noteHeight) * 0.2) solid var(--illoFold);
+    }
+  }
+
+  .note.research {
+    background-color: var(--researchBg);
+
+    .innerTriangle {
+      border-top: calc(var(--noteHeight) * 0.2) solid var(--researchFold);
     }
   }
 

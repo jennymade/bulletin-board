@@ -2,6 +2,7 @@
   /* hero gif imports */
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
+  import aibayarea from "#lib/thumbnails/aibayarea.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
   import crapt1dataviz from "#lib/thumbnails/cra-pt1-dv.gif";
   import covidwastewater from "#lib/thumbnails/covid-wastewater.gif";
@@ -21,7 +22,7 @@
   };
 
   type Section = {
-    category: "design" | "dataviz" | "illustration";
+    category: "design" | "dataviz" | "illustration" | "research";
     heading: string;
     symbol: string;
     notes: Note[];
@@ -44,7 +45,11 @@
           image: powellst,
           alt: "Karin Flood remembers stepping out of her office at the corner of Powell and Market streets in San Francisco before the pandemic and facing shoulder-to-shoulder crowds outside. 'It was Times Square West,' she said. 'The kind of hustle and bustle and excitement you only get in a big city.' Stepping out of Powell and Market today finds a different scene.",
         },
-        { id: "design-work", title: "design work" },
+        {
+          id: "aibayarea",
+          image: aibayarea,
+          alt: "TKTK",
+        },
       ],
     },
     {
@@ -91,6 +96,12 @@
         },
       ],
     },
+    {
+      category: "research",
+      heading: "research",
+      symbol: "❖",
+      notes: [{ id: "airbnb" }, { id: "aigovuse" }],
+    },
   ];
 
   /** modal-specific **/
@@ -123,7 +134,7 @@
       <h1>
         <!--use jenny kwon or jennymade?-->
         <span class="jennyfont">jenny kwon</span><span class="definition"
-          >noun</span
+          >they/them</span
         >
       </h1>
     </div>
@@ -162,6 +173,19 @@
               {/each}
             </ul>
           </li>
+          <!-- modal after clicking on each note -->
+          {#if visible}
+            <!-- HTML *must not* be changed! -->
+            <dialog
+              bind:this={dialog}
+              class="backdrop-blur"
+              onclose={closeModal}
+            >
+              <h1>TKTK Title</h1>
+              <p>It's dangerous to go alone! Take this.</p>
+              <button type="button" onclick={closeModal}>exit</button>
+            </dialog>
+          {/if}
         {/each}
       </ul>
     </div>
@@ -169,16 +193,6 @@
   <div class="footer">
     <p>let's collaborate: kwonjseo at gmail dot com</p>
   </div>
-
-  <!-- modal after clicking on each note -->
-  {#if visible}
-    <!-- HTML *must not* be changed! -->
-    <dialog bind:this={dialog} class="backdrop-blur" onclose={closeModal}>
-      <h1>TKTK Title</h1>
-      <p>It's dangerous to go alone! Take this.</p>
-      <button type="button" onclick={closeModal}>close modal</button>
-    </dialog>
-  {/if}
 </div>
 
 <style>
@@ -205,10 +219,13 @@
     --designBg: rgba(227, 255, 115, 0.75);
     --datavizBg: rgba(255, 189, 89, 0.75);
     --illoBg: rgba(230, 184, 255, 0.75);
+    --researchBg: rgba(184, 254, 255, 0.75);
 
+    /* in cymk, the k value is 10% instead of 0% like in the background*/
     --designFold: rgba(204, 230, 103, 1);
     --datavizFold: rgba(230, 170, 80, 1);
     --illoFold: rgba(207, 165, 230, 1);
+    --researchFold: rgba(165, 230, 230, 1);
 
     /* adjust: how much do you want each thumbnail to match the section color */
     --noteFilter: opacity(95%);
@@ -398,6 +415,30 @@
     }
   }
 
+  /* accessibility: for reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .notesScrollSection {
+      height: auto;
+    }
+
+    .notesParentWrapper {
+      position: static;
+      height: auto;
+      min-height: 100vh;
+      overflow: visible;
+    }
+
+    .notesScrollTrack {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: none;
+      animation: none;
+      transform: none;
+    }
+  }
+
   .sectionHed {
     font-family: "jennymadeFontV2", sans-serif;
     font-size: 72px;
@@ -478,6 +519,10 @@
     color: var(--illoFold);
   }
 
+  .notesContainer.research span {
+    color: var(--researchFold);
+  }
+
   /* this style applies to whichever notesContainer section is FIRST (in this case, design) */
   .notesContainer.design {
     /* to counter the 1rem margin */
@@ -503,29 +548,8 @@
     outline: 3px dashed #000;
   }
 
-  /* matching fold colors based on section */
-  .note.design {
-    background-color: var(--designBg);
-
-    .innerTriangle {
-      border-top: calc(var(--noteHeight) * 0.2) solid var(--designFold);
-    }
-  }
-
-  .note.dataviz {
-    background-color: var(--datavizBg);
-
-    .innerTriangle {
-      border-top: calc(var(--noteHeight) * 0.2) solid var(--datavizFold);
-    }
-  }
-
-  .note.illustration {
-    background-color: var(--illoBg);
-
-    .innerTriangle {
-      border-top: calc(var(--noteHeight) * 0.2) solid var(--illoFold);
-    }
+  ul {
+    list-style-type: none;
   }
 
   .noteHed {
@@ -540,88 +564,6 @@
     font-size: 36px;
   } */
 
-  ul {
-    list-style-type: none;
-  }
-
-  .noteContent {
-    text-align: center;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    /* the -49 instead of -50% to correct for the minor bottom border */
-    transform: translate(-50%, -49%);
-  }
-
-  .noteContent > img {
-    /* object fit isn't working for some reason */
-    object-fit: contain;
-    filter: var(--noteFilter);
-    width: calc(var(--noteWidth) * var(--noteVisibility));
-    height: calc(var(--noteHeight) * var(--noteVisibility));
-  }
-
-  /* styling for the fold microanimation specifically */
-
-  /* little fold indicator without hover/focus */
-  @keyframes foldUp {
-    0% {
-      transform: scale(1) translate3d(0, 0, 0);
-    }
-    /* adjut this spacing */
-    50% {
-      transform: scale(1.5) translate3d(-40px, -80px, 0);
-    }
-    100% {
-      transform: scale(1) translate3d(0, 0, 0);
-    }
-  }
-
-  .fold {
-    /* more seconds --> slower animation (reduce motion sickness)*/
-    animation: 7.5s foldUp ease-in-out;
-    animation-iteration-count: infinite;
-    transition: transform 400ms ease-in-out;
-    /* z-index: 2; */
-
-    .outerTriangle {
-      border-left: calc(var(--noteHeight) * 0.2) solid transparent;
-      border-bottom: calc(var(--noteHeight) * 0.2) solid var(--whiteboardColor);
-      border-top: calc(var(--noteHeight) * 0.2) solid transparent;
-      height: calc(var(--noteHeight) - 6rem);
-      width: 0;
-      position: absolute;
-      right: 0px;
-    }
-
-    .innerTriangle {
-      border-left: 0;
-      border-right: calc(var(--noteHeight) * 0.2) solid transparent;
-      border-top: calc(var(--noteHeight) * 0.2) solid transparent;
-      border-bottom: 0;
-      height: 0;
-      width: 0;
-      position: absolute;
-      top: calc(var(--noteHeight) - 3rem);
-      right: 0px;
-    }
-
-    .innerTriangle > span {
-      color: #000;
-      font-size: 12px;
-      font-family: "jennymadeFontV2", sans-serif;
-      position: absolute;
-      top: -24px;
-      left: 20px;
-      z-index: 2; /* on top of the innerTriangle fold */
-    }
-  }
-
-  /* this doesn't work when there's a default animation */
-  .fold:hover,
-  .fold:focus {
-    transform: scale(1.5) translate3d(-2.5rem, -5rem, 0);
-  }
   .footer {
     text-align: center;
     font-family: "jennymadeFontV2";
@@ -635,8 +577,15 @@
     }
   }
 
+  dialog {
+    background-color: #fff;
+    border: none;
+    height: 50vh;
+    width: 80vw;
+  }
+
   /* styling the modal */
   .backdrop-blur::backdrop {
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(4px);
   }
 </style>
