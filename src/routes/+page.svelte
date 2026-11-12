@@ -5,6 +5,7 @@
   import powellst from "#lib/thumbnails/powellst.gif";
   import aibayarea from "#lib/thumbnails/aibayarea.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
+  import blacksfdemographics from "#lib/thumbnails/blacksf-pt2-demographics.gif";
   import cafaultsmap from "#lib/thumbnails/cafaultsmap.gif";
   import cafaulttypes from "#lib/thumbnails/cafaulttypes.gif";
   import crapt1dataviz from "#lib/thumbnails/cra-pt1-dv.gif";
@@ -80,6 +81,12 @@
       heading: "dataviz",
       symbol: "✧",
       notes: [
+        {
+          id: "bayviewdemographics",
+          image: blacksfdemographics,
+          title: "Demographic changes in the Bayview neighborhood over time",
+          alt: "Demographic changes in the Bayview neighborhood over time.",
+        },
         {
           id: "cafaultsmap",
           image: cafaultsmap,
@@ -165,16 +172,6 @@
       ],
     },
   ];
-
-  // const projectdescriptions: ProjectDescription[] = [
-  //   {
-  //     id: "TKTK",
-  //     title: "TKTK",
-  //     desc: "TKTK",
-  //     image1: "TKTKT",
-  //     image2: "TKTK",
-  //   },
-  // ];
 
   /** modal-specific **/
   let dialog = $state<HTMLDialogElement | undefined>(undefined);
