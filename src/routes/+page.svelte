@@ -4,6 +4,8 @@
   import powellst from "#lib/thumbnails/powellst.gif";
   import aibayarea from "#lib/thumbnails/aibayarea.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
+  import cafaultsmap from "#lib/thumbnails/cafaultsmap.gif";
+  import cafaulttypes from "#lib/thumbnails/cafaulttypes.gif";
   import crapt1dataviz from "#lib/thumbnails/cra-pt1-dv.gif";
   import covidwastewater from "#lib/thumbnails/covid-wastewater.gif";
   import koreancomfortfood from "#lib/thumbnails/koreancomfortfood.gif";
@@ -11,6 +13,7 @@
   import satellites from "#lib/thumbnails/satellites.gif";
   import airbnbsf from "#lib/thumbnails/airbnbsf.gif";
   import aigovusage from "#lib/thumbnails/aigovusage.gif";
+  import explicitlicenses from "#lib/thumbnails/explicit-license-plates.png";
 
   /** note specific**/
   import NoteCard from "#lib/components/NoteCard.svelte";
@@ -72,6 +75,13 @@
       symbol: "✧",
       notes: [
         {
+          id: "cafaultsmap",
+          image: cafaultsmap,
+          title:
+            "Mapping California's major faults and surrounding active faults",
+          alt: "California's major faults, mapped in this interactive Maplibre map and color coded, and all surrounding active faults (with dotted lines representing blind faults and solid lines representing surface faults). The ones in solid orange and blue are closest and most pertinent to the Bay Area: the San Andreas Fault (Zone) (orange) and the Hayward-Rodgers Creek Fault (blue).",
+        },
+        {
           id: "covidwastewater",
           image: covidwastewater,
           alt: "From 2019 to 2024, the state cited for-profit psychiatric hospitals over 17 potentially preventable deaths, 77 improper restraints or seclusion of patients and 128 physical or sexual assaults of patients",
@@ -109,6 +119,20 @@
           image: satellites,
           alt: "Low Earth orbit satellites orbit points on the Earth and are much closer to the ground. They can link with other satellites to create internet connectivity and are the ones made by Starlink. Geostationary orbit satellites fly much higher above earth and stay parked above a fixed point on the equator. They're typically used by satellite TV providers to provide broad service coverage.",
         },
+        {
+          id: "cafaulttypes",
+          image: cafaulttypes,
+          alt: "In California, there are several different types of faults, with one of the most common being strike-slip faults. These faults occur when two blocks of rock slide past each other horizontally, often resulting in earthquakes. Another type is the reverse fault, where an overlying piece of rock is pushed upward relative to the diving block. Each fault type has distinct characteristics and can significantly impact the surrounding landscape and communities.",
+        },
+        {
+          id: "explicitlicenses",
+          image: explicitlicenses,
+          title:
+            "These license plates were deemed too lewd for the California DMV",
+          description:
+            "Want to tell the world you’re “RACIST”? Taunt the car you pass on the highway to “KSMYAS5”? Force passersby to read “69MMHMM”? Not on the California Department of Motor Vehicles’ watch. The DMV rejected almost 7,000 requests for personalized plates in the first eight months of 2023. The Chronicle obtained the data for a look at some of the more surprising rejections, many of which are indeed frown-worthy.",
+          alt: "A pile of real license plate combos that were rejected by the California DMV, including, but not limited to: KSMYAS5, THTBCH, NOFXXX, ANXS AF and RACIST",
+        },
       ],
     },
     {
@@ -121,12 +145,15 @@
           image: airbnbsf,
           title:
             "Visualizing and analyzing Airbnb listings in San Francisco by neighborhood",
+          description: "TKTK",
           alt: "In 2017, the Mission District had the largest share of Airbnb listings in San Francisco with 12.5% while the Downtown/Civic Center area had under half of that at 5.4% of the city's listings. Nearly a decade later, Downtown/Civic Center now has the largest share of Airbnb listings in the city with 9.7% while the Mission District has dropped to 7.5% of the city's listings due to the city's new short-term rental regulations and enforcement as well as COVID-19's impact on tourism and travel patterns.",
         },
         {
           id: "aigovusage",
           image: aigovusage,
           title: "FOIAing San Francisco's government AI usage",
+          description:
+            "Inspired by KNKX and Cascade PBS coverage of local government AI usage (uncovering in the process how the city of Bellingham, WA's draft AI policy was created with the help of ChatGPT), I saw that it had been nearly a year since the city made Microsoft Copilot available to all city staff and FOIAed nearly every city department in San Francisco for ChatGPT and CoPilot usage data.",
           alt: "Since introducing Copilot to its staff mid-last year, San Francisco's city government's usage of the AI assistant over doubled between July 2025 and March 2026, measured by messages sent and received.",
         },
       ],
@@ -147,17 +174,24 @@
   let dialog = $state<HTMLDialogElement | undefined>(undefined);
   let visible = $state(false);
   let selectedNoteTitle = $state<string | undefined>(undefined);
+  let selectedNoteDesc = $state<string | undefined>(undefined);
 
-  function openDetails(Note?: { id: string; title: string }) {
+  function openDetails(Note?: {
+    id: string;
+    title: string;
+    description: string;
+  }) {
     dialog?.showModal();
     visible = true;
     selectedNoteTitle = Note?.title;
+    selectedNoteDesc = Note?.description;
   }
 
   function closeModal() {
     dialog?.close();
     visible = false;
     selectedNoteTitle = undefined;
+    selectedNoteDesc = undefined;
   }
 
   /* for copying email */
@@ -232,7 +266,12 @@
               <h2 class="projectTitle">
                 {selectedNoteTitle}
               </h2>
-              <p class="projectDesc">Insert takeaways from the project here</p>
+              <div
+                class="projectDesc"
+                dangerouslySetInnerHTML={{
+                  __html: `<p>${selectedNoteDesc}</p>`,
+                }}
+              ></div>
               <button class="closeModal" type="button" onclick={closeModal}
                 >x</button
               >
@@ -244,10 +283,13 @@
   </div>
   <div class="footer">
     <div>
-      let's collaborate: <span class="email" onclick={copyEmailToClipboard}
-        >kwonjseo at gmail dot com</span
+      let's collaborate: <span
+        title="click to copy my email!"
+        class="email"
+        onclick={copyEmailToClipboard}>kwonjseo at gmail dot com</span
       ><span id="copyIndicator">copied!</span>
     </div>
+    <div class="madewithsvelte">made with love and svelte</div>
   </div>
 </div>
 
@@ -564,6 +606,7 @@
     @media (max-width: 672px) {
       width: 100vw;
       flex-basis: 100vw;
+      overflow-y: scroll;
     }
   }
 
@@ -596,7 +639,8 @@
     font-family: "jennymadeFontV2";
     margin: 1rem;
     font-size: 36px;
-    height: 10vh;
+    padding-top: 1rem;
+    height: 50px;
 
     /* for mobile */
     @media (max-width: 640px) {
@@ -613,6 +657,15 @@
       text-underline-offset: 1px;
       text-decoration-skip-ink: auto;
       text-decoration-color: #000;
+    }
+
+    .madewithsvelte {
+      font-size: 18px;
+      padding-top: 1rem;
+
+      @media (max-width: 640px) {
+        padding-bottom: 36px;
+      }
     }
   }
 
