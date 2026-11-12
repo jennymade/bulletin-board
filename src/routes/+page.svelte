@@ -1,6 +1,7 @@
 <script lang="ts">
   /* hero gif imports */
   import blacksf from "#lib/thumbnails/blacksf-pt1-topper.gif";
+  import blacksf2 from "#lib/thumbnails/blacksf-pt2-topper.gif";
   import powellst from "#lib/thumbnails/powellst.gif";
   import aibayarea from "#lib/thumbnails/aibayarea.gif";
   import psychholds from "#lib/thumbnails/psychholds.gif";
@@ -52,6 +53,11 @@
       heading: "design",
       symbol: "✴",
       notes: [
+        {
+          id: "blacksf2",
+          image: blacksf2,
+          alt: "The history and sale of one Bayview house highlights a broader demographic shift of Black families moving away from San Francisco.",
+        },
         {
           id: "blacksf",
           image: blacksf,
