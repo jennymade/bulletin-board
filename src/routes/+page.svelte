@@ -499,14 +499,14 @@
       text-align: center;
       margin: 0 auto;
       p {
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 400;
         color: #676767;
       }
       .scrollDisclaimer {
         font-weight: 200;
-        margin-top: -2rem;
-        font-size: 18px;
+        margin-top: -1.5rem;
+        font-size: 16px;
         color: #909090;
       }
     }
