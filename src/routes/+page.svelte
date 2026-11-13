@@ -235,13 +235,16 @@
       > <span class="interpunctStar">✶</span>
       <a href="https://www.linkedin.com/in/kwonjs/">linkedin</a>
     </p>
-    <p class="scrollInstructions">
-      keep scrolling <span class="scrollIndicator">👇</span>
-    </p>
   </div>
 
   <div class="notesScrollSection">
     <div class="notesParentWrapper">
+      <div class="scrollInstructions">
+        <p>scroll down <span class="scrollIndicator">👇</span></p>
+        <p class="scrollDisclaimer">
+          window moves <b>right to left</b> as you scroll
+        </p>
+      </div>
       <ul class="notesScrollTrack">
         {#each sections as section (section.category)}
           <li class="{section.category} notesContainer">
@@ -414,10 +417,6 @@
       }
     }
 
-    .scrollInstructions {
-      font-size: 24px !important;
-    }
-
     /* styling header section for mobile */
     @media (max-width: 640px) {
       text-align: left;
@@ -433,10 +432,6 @@
 
       p {
         font-size: 24px;
-      }
-
-      .scrollInstructions {
-        font-size: 18px;
       }
     }
   }
@@ -499,6 +494,23 @@
       top: 0;
     }
 
+    .scrollInstructions {
+      font-family: "Futura PT", sans-serif;
+      text-align: center;
+      margin: 0 auto;
+      p {
+        font-size: 30px;
+        font-weight: 400;
+        color: #676767;
+      }
+      .scrollDisclaimer {
+        font-weight: 200;
+        margin-top: -2rem;
+        font-size: 18px;
+        color: #909090;
+      }
+    }
+
     .notesScrollTrack {
       /* replacing var(--notesTotalWidth); */
       width: max-content;
@@ -557,11 +569,6 @@
   .notesParentWrapper {
     display: flex;
     flex-direction: column;
-
-    /* text width */
-    @media (min-width: 672px) {
-      flex-direction: row;
-    }
 
     /* to make the horizontal scrolling work */
     position: sticky;
